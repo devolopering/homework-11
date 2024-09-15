@@ -1,41 +1,45 @@
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCountries, setLoading, setError } from "../store/countriesSlice";
+import { toggleCountrySelection } from "../store/selectedCountriesSlice";
 import HeroSection from "../components/HeroSection";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeadCell,
-  Drawer,
-  Button,
-  Flowbite
-} from "flowbite-react";
+import { Table, TableBody, TableHead, TableHeadCell, Drawer, Button, Flowbite } from "flowbite-react";
+import { Pagin } from "../components/Pagin";
 
 export default function Countries() {
-  const [countries, setCountries] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const { countries, loading, error } = useSelector((state) => state.countries);
+  const { selectedCountries } = useSelector((state) => state.selectedCountries);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setLoading(true)
-    setError(null)
+    dispatch(setLoading(true));
+    dispatch(setError(null));
     async function fetchCountries() {
       try {
-        const response = await fetch('https://restcountries.com/v3.1/all')
-        if(!response.ok){
-          throw new Error ('Error Fetched Countries!')
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        if (!response.ok) {
+          throw new Error('Error Fetched Countries!');
         }
-        const fetchedCountries = await response.json()
-        setCountries(fetchedCountries)
+        const fetchedCountries = await response.json();
+        dispatch(setCountries(fetchedCountries));
       } catch (error) {
-        console.log(error.message)
-      }finally {
-        setLoading(false)
+        console.log(error.message);
+      } finally {
+        dispatch(setLoading(false));
       }
     }
 
     fetchCountries();
-  }, []);
-  console.log(countries)
+  }, [dispatch]);
+
+  const handleSelect = (country) => {
+    dispatch(toggleCountrySelection(country));
+
+  };
+
+  const isCountrySelected = (country) =>
+    selectedCountries.some((selected) => selected.cca2 === country.cca2);
+
   const customTheme = {
     table: {
       row: {
@@ -55,30 +59,39 @@ export default function Countries() {
       <HeroSection />
 
       <Flowbite theme={{ theme: customTheme }}>
-      <div className='max-w-[1140px] mx-auto mt-4'>
-        <Table striped>
-          <TableHead>
-            <TableHeadCell>Name</TableHeadCell>
-            <TableHeadCell>Population</TableHeadCell>
-            <TableHeadCell>Capital</TableHeadCell>
-          </TableHead>
-          <TableBody className='divide-y'>
-            {countries.map((country) =>
-                <Table.Row key={country.cca2} className="bg-white dark:border-gray-700 border-blue-500 dark:bg-gray-800">
+        <div className="max-w-[1140px] mx-auto mt-4">
+          <Table striped>
+            <TableHead>
+              <TableHeadCell>Name</TableHeadCell>
+              <TableHeadCell>Population</TableHeadCell>
+              <TableHeadCell>Capital</TableHeadCell>
+              <TableHeadCell>Action</TableHeadCell>
+            </TableHead>
+            <TableBody className="divide-y">
+              {countries.map((country) => (
+                <Table.Row
+                  key={country.cca2}
+                  className="bg-white dark:border-gray-700 border-blue-500 dark:bg-gray-800"
+                >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
                     {country.name.common}
                   </Table.Cell>
                   <Table.Cell>{country.population}</Table.Cell>
-                  <Table.Cell>{country.capital} </Table.Cell>
+                  <Table.Cell>{country.capital}</Table.Cell>
                   <Table.Cell>
-                    <Button color={"gray"}>Select</Button>
+                    <Button
+                      color={isCountrySelected(country) ? "success" : "gray"}
+                      onClick={() => handleSelect(country)}
+                    >
+                      {isCountrySelected(country) ? "O'chirish" : "Tanlash"}
+                    </Button>
                   </Table.Cell>
                 </Table.Row>
-            )}
-         
-          </TableBody>
-        </Table>
-      </div>
+              ))}
+            </TableBody>
+          </Table>
+          <Pagin/>
+        </div>
       </Flowbite>
     </div>
   );
