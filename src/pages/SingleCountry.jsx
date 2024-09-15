@@ -36,11 +36,11 @@ export default function SingleCountry() {
   return (
     
     <div className="max-w-[400px] mr-auto  ">
-      <button onClick={() => navigate(-1)} className="flex items-center w-min text-white text-xl rounded px-2 py-2 ml-5 mt-5 mb-6  bg-blue-500 gap-2 gray">
+      <button onClick={() => navigate(-1)} className="flex items-center w-min text-white text-xl rounded px-2 py-2 mt-5 mb-6  bg-blue-500 gap-2 gray">
       <FaArrowLeftLong />
         <p className="text-nowrap font-semibold">Back to</p>
       </button>
-    <div className="flex items-start flex-col ml-20 shadow-md rounded-tl-lg rounded-tr-lg">
+    <div className="flex items-start flex-col shadow-md rounded-tl-lg rounded-tr-lg">
      
         <div className="flex items-center w-full flex-col">
           <img className="w-full h-[200px] rounded-tl-lg rounded-tr-lg" src={countries.flags.png} alt={countries.name.common}/>

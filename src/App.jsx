@@ -17,7 +17,7 @@ function App() {
             path='/'
             element={<Countries isOpen={isOpen} setIsOpen={setIsOpen} />}
           />
-          <Route path="/countries/:code" element={<SingleCountry />} />
+          <Route path="/countries/:code" element={<div className="max-w-[1140px] mx-auto"><SingleCountry /></div>} />
         </Routes>
       </Router>
     </div>

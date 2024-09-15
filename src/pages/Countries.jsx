@@ -66,7 +66,6 @@ export default function Countries() {
               <TableHeadCell>Name</TableHeadCell>
               <TableHeadCell>Population</TableHeadCell>
               <TableHeadCell>Capital</TableHeadCell>
-              <TableHeadCell>Action</TableHeadCell>
             </TableHead>
             <TableBody className="divide-y">
               {countries.map((country) => (
