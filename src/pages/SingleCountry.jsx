@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import LineChartComponent from "../components/chartJs/LineChart";
+import LineChart from "../components/chartJs/LineChart";
 
 
 export default function SingleCountry() {
@@ -35,12 +37,13 @@ export default function SingleCountry() {
 
   return (
     
-    <div className="max-w-[400px] mr-auto  ">
+    <div className="">
       <button onClick={() => navigate(-1)} className="flex items-center w-min text-white text-xl rounded px-2 py-2 mt-5 mb-6  bg-blue-500 gap-2 gray">
       <FaArrowLeftLong />
         <p className="text-nowrap font-semibold">Back to</p>
       </button>
-    <div className="flex items-start flex-col shadow-md rounded-tl-lg rounded-tr-lg">
+      <div className="grid grid-cols-2 items-center justify-between ">     
+    <div className="flex max-w-[400px]  mx-auto items-start flex-col shadow-md rounded-tl-lg rounded-tr-lg">
      
         <div className="flex items-center w-full flex-col">
           <img className="w-full h-[200px] rounded-tl-lg rounded-tr-lg" src={countries.flags.png} alt={countries.name.common}/>
@@ -53,7 +56,8 @@ export default function SingleCountry() {
           <h3><strong>Population:</strong> {countries.population}</h3>
           <h3><strong>Languages:</strong> {countries.languages.eng}</h3>
         </div>
-     
+        </div>
+        <LineChart/>
     </div>
     </div>
   );
