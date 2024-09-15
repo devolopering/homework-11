@@ -14,7 +14,7 @@ import { getFromLocalStorage } from "../utils";
       root: {
         position: {
           right: {
-            on: "right-0 top-0 h-screen w-[400px] transform-none", // Kenglikni 400px qilib belgiladik
+            on: "right-0 top-0 h-screen w-[400px] transform-none", 
             off: "right-0 top-0 h-screen w-[400px] translate-x-full",
           },
         },

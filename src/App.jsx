@@ -17,7 +17,7 @@ function App() {
             path='/'
             element={<Countries isOpen={isOpen} setIsOpen={setIsOpen} />}
           />
-          <Route path='/country/:id' element={<SingleCountry />} />
+          <Route path="/countries/:code" element={<SingleCountry />} />
         </Routes>
       </Router>
     </div>

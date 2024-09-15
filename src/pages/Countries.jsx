@@ -5,6 +5,7 @@ import { toggleCountrySelection } from "../store/selectedCountriesSlice";
 import HeroSection from "../components/HeroSection";
 import { Table, TableBody, TableHead, TableHeadCell, Drawer, Button, Flowbite } from "flowbite-react";
 import { Pagin } from "../components/Pagin";
+import { Link } from "react-router-dom";
 
 export default function Countries() {
   const { countries, loading, error } = useSelector((state) => state.countries);
@@ -74,7 +75,7 @@ export default function Countries() {
                   className="bg-white dark:border-gray-700 border-blue-500 dark:bg-gray-800"
                 >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
-                    {country.name.common}
+                  <Link to={`/countries/${country.cca2}`}>{country.name.common}</Link>
                   </Table.Cell>
                   <Table.Cell>{country.population}</Table.Cell>
                   <Table.Cell>{country.capital}</Table.Cell>
