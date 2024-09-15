@@ -1,5 +1,5 @@
 import React from 'react'
-import CountryCarusel from './Carusel'
+import CountryCarusel from './CountryCarusel'
 function HeroSection() {
   return (
     <div className='hero bg-cover text-center text-white'>
